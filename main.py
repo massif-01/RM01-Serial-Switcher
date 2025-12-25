@@ -111,7 +111,21 @@ def switch_to_module(module_type: str) -> bool:
             time.sleep(3)
             print("正在执行：agx recovery")
             child.sendline('agx recovery')
-            time.sleep(2)
+            
+            # 等待设备恢复完成的日志
+            print("等待设备恢复完成...")
+            child.timeout = 60  # 设置超时时间为60秒
+            index = child.expect(['.*设备强制恢复模式完成.*', pexpect.TIMEOUT, pexpect.EOF])
+            
+            if index == 0:
+                print("✓ 检测到恢复完成日志")
+                time.sleep(1)
+            elif index == 1:
+                print("\n警告：等待恢复完成超时，继续保存配置")
+            else:
+                print("\n警告：连接意外断开")
+                child.close()
+                return False
         
         # 保存配置
         print("正在保存配置...")

@@ -1,33 +1,33 @@
-# RM-01 Serial Switcher Tool
+# RM-01 串口切换工具
 
-## Introduction
+## 简介
 
-A tool for switching between different modules on RM-01 device via serial console.
+一个用于通过串口控制台在 RM-01 设备的不同模块之间切换的工具。
 
-## Features
+## 功能特性
 
-**Switch to Inference Module**
-   - Automatically detect `/dev/ttyACM0`
-   - Connect to serial console
-   - Execute `usbmux agx` command
-   - Save configuration
+**切换到推理模块**
+   - 自动检测 `/dev/ttyACM0`
+   - 连接到串口控制台
+   - 执行 `usbmux agx` 命令
+   - 保存配置
 
-**Switch to Application Module**
-   - Automatically detect `/dev/ttyACM0`
-   - Connect to serial console
-   - Execute `usbmux lpmu` command
-   - Save configuration
+**切换到应用模块**
+   - 自动检测 `/dev/ttyACM0`
+   - 连接到串口控制台
+   - 执行 `usbmux lpmu` 命令
+   - 保存配置
 
-## Prerequisites
+## 前置要求
 
-- Linux operating system
+- Linux 操作系统
 - Python 3.6+
-- `tio` serial terminal tool installed
-- `pexpect` Python library
+- 已安装 `tio` 串口终端工具
+- `pexpect` Python 库
 
-## Installation
+## 安装
 
-1. Install system dependencies:
+1. 安装系统依赖：
 ```bash
 # Ubuntu/Debian
 sudo apt install tio
@@ -36,39 +36,39 @@ sudo apt install tio
 sudo pacman -S tio
 ```
 
-2. Install Python dependencies:
+2. 安装 Python 依赖：
 ```bash
 pip3 install -r requirements.txt
 ```
 
-## Usage
+## 使用方法
 
 ```bash
 python3 main.py
-# or
+# 或者
 ./run.sh
 ```
 
-## System Requirements
+## 系统要求
 
-- Linux operating system
+- Linux 操作系统
 - Python 3.6+
-- tio serial terminal
-- Access to `/dev/ttyACM0` (may require sudo or user in dialout group)
+- tio 串口终端
+- 访问 `/dev/ttyACM0` 的权限（可能需要 sudo 或将用户添加到 dialout 组）
 
-## User Permission Setup
+## 用户权限设置
 
-To access serial ports without sudo, add your user to the dialout group:
+要在不使用 sudo 的情况下访问串口，请将您的用户添加到 dialout 组：
 
 ```bash
 sudo usermod -a -G dialout $USER
 ```
 
-Then log out and log back in for the change to take effect.
+然后注销并重新登录以使更改生效。
 
-## Notes
+## 注意事项
 
-- The tool automatically waits for `/dev/ttyACM0` to be available
-- If device is not detected after 10 seconds, the operation will fail
-- Make sure the RM-01 device is properly connected via USB
+- 工具会自动等待 `/dev/ttyACM0` 可用
+- 如果 10 秒后仍未检测到设备，操作将失败
+- 确保 RM-01 设备已通过 USB 正确连接
 

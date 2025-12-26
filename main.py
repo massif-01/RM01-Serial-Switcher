@@ -105,19 +105,6 @@ def switch_to_module(module_type: str) -> bool:
         child.sendline(f'usbmux {module_type}')
         time.sleep(2)
         
-        # 如果是推理模块，执行 agx recovery
-        if module_type == 'agx':
-            print("等待 3 秒...")
-            time.sleep(3)
-            print("正在执行：agx recovery")
-            child.sendline('agx recovery')
-            
-            # 等待5秒后告诉用户成功
-            print("等待设备恢复...")
-            time.sleep(5)
-            print("✓ AGX recovery 命令已执行完成")
-            time.sleep(1)
-        
         # 保存配置
         print("正在保存配置...")
         child.sendline('usbmux save')
@@ -206,7 +193,7 @@ def main():
         print("\n请选择操作：")
         print("  1. 切换到推理模块")
         print("  2. 切换到应用模块")
-        print("  3. 推理模组重置")
+        print("  3. 推理模组重置（刷机时找不到设备请执行此项）")
         print("  4. 退出")
         print()
         
